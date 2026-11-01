@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PNG to ICO Converter — Convert PNG to ICO Online Free</title>
+<meta name="description" content="Convert PNG to ICO online for free. Upload a PNG and download a multi-resolution Windows .ico favicon. Fast, private, and 100% in your browser.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+	<div class="wrap">
+		<a class="brand" href="./">
+			<span class="brand-mark" aria-hidden="true">PNG</span>
+			<span class="brand-text">PNG to ICO</span>
+		</a>
+	</div>
+</header>
+
+<main class="wrap">
+
+	<section class="hero">
+		<h1>PNG to ICO Converter</h1>
+		<p class="lede">
+			Convert any PNG image into a multi-resolution Windows <code>.ico</code> file.
+			Everything runs locally in your browser — your images are never uploaded to a server.
+		</p>
+	</section>
+
+	<section class="panel" aria-labelledby="tool-heading">
+		<h2 id="tool-heading" class="sr-only">Converter</h2>
+
+		<!-- Step 1 -->
+		<div class="control-group">
+			<label class="main-label" for="fileInput">1. Choose a PNG image</label>
+			<p class="description">Square images give the best results. Max file size 10 MB.</p>
+
+			<div id="dropzone" class="dropzone" tabindex="0" role="button"
+			     aria-label="Choose a PNG file or drag and drop it here">
+				<svg class="dropzone-icon" viewBox="0 0 24 24" aria-hidden="true">
+					<path d="M12 16V4m0 0L8 8m4-4 4 4" fill="none" stroke="currentColor"
+					      stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" fill="none"
+					      stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+				</svg>
+				<p class="dropzone-text">
+					<strong>Drop your PNG here</strong><br>
+					<span class="muted">or click to browse</span>
+				</p>
+			</div>
+			<input type="file" id="fileInput" accept="image/png,.png" hidden>
+			<p id="fileName" class="file-name">No file selected.</p>
+		</div>
+
+		<!-- Step 2 -->
+		<div class="control-group">
+			<span class="main-label">2. Icon sizes</span>
+			<p class="description">A single .ico file can store several resolutions.</p>
+			<div class="checkbox-grid" id="sizeGrid">
+				<label class="check"><input type="checkbox" class="size-checkbox" value="16" checked> <span>16 px</span></label>
+				<label class="check"><input type="checkbox" class="size-checkbox" value="24"> <span>24 px</span></label>
+				<label class="check"><input type="checkbox" class="size-checkbox" value="32" checked> <span>32 px</span></label>
+				<label class="check"><input type="checkbox" class="size-checkbox" value="48" checked> <span>48 px</span></label>
+				<label class="check"><input type="checkbox" class="size-checkbox" value="64"> <span>64 px</span></label>
+				<label class="check"><input type="checkbox" class="size-checkbox" value="128"> <span>128 px</span></label>
+				<label class="check"><input type="checkbox" class="size-checkbox" value="256" checked> <span>256 px</span></label>
+			</div>
+		</div>
+
+		<!-- Step 3 -->
+		<div class="control-group">
+			<label class="main-label" for="interpolation">3. Resampling method</label>
+			<p class="description">Bicubic gives the smoothest result; nearest neighbour keeps hard edges.</p>
+			<select id="interpolation">
+				<option value="bicubicInterpolation" selected>Bicubic (recommended)</option>
+				<option value="bilinearInterpolation">Bilinear</option>
+				<option value="hermiteInterpolation">Hermite</option>
+				<option value="bezierInterpolation">Bezier</option>
+				<option value="nearestNeighbor">Nearest neighbour</option>
+			</select>
+		</div>
+
+		<!-- Actions -->
+		<div class="button-group">
+			<button id="convertBtn" class="btn btn-primary" disabled>Convert to ICO</button>
+			<button id="downloadBtn" class="btn btn-success" disabled hidden>Download .ico</button>
+			<button id="resetBtn" class="btn btn-ghost" disabled>Start over</button>
+		</div>
+
+		<p id="status" class="status" role="status" aria-live="polite"></p>
+	</section>
+
+	<!-- Preview -->
+	<section id="previewSection" class="panel" hidden aria-labelledby="preview-heading">
+		<h2 id="preview-heading">Icon preview</h2>
+		<p class="description">Each resolution stored inside the generated .ico file.</p>
+		<div class="preview-grid" id="previewGrid"></div>
+	</section>
+
+	<section class="panel info-panel">
+		<h2>How it works</h2>
+		<ol class="steps">
+			<li>Your PNG is decoded in the browser using the Canvas API.</li>
+			<li>The image is resampled to each selected size.</li>
+			<li>A standard Windows <code>.ico</code> container is written with a 32-bit
+				alpha channel for every size, then downloaded to your device.</li>
+		</ol>
+		<p class="muted small">
+			Powered by a browser port of the
+			<a href="https://github.com/steambap/png-to-ico" rel="noopener noreferrer" target="_blank">png-to-ico</a>
+			library (MIT licensed), producing byte-identical output to the original Node.js tool.
+		</p>
+	</section>
+
+	<section class="panel faq-panel">
+		<h2>Frequently asked questions</h2>
+
+		<h3>Which sizes should I include?</h3>
+		<p>
+			For a website favicon, 16, 32 and 48 pixels cover browser tabs, bookmarks and
+			desktop shortcuts. Windows also looks for a 256&nbsp;px icon in the large-icon view,
+			so including 256 is a good idea.
+		</p>
+
+		<h3>Why does my image look blurry at small sizes?</h3>
+		<p>
+			That is normal downscaling. Try a different resampling method — nearest neighbour
+			keeps pixel art crisp, while bicubic is smoother for photographs and logos.
+		</p>
+
+		<h3>Are my images uploaded anywhere?</h3>
+		<p>
+			No. The file is read with the browser's File API and converted locally. Nothing is
+			sent over the network, and no copy of your image is stored on a server.
+		</p>
+
+		<h3>Can the .ico file hold transparency?</h3>
+		<p>
+			Yes. Every generated size is stored as 32-bit BGRA, so transparent PNG areas stay
+			transparent in the icon.
+		</p>
+	</section>
+
+</main>
+
+<footer class="site-footer">
+	<div class="wrap">
+		<p>PNG to ICO Converter — runs entirely in your browser.</p>
+	</div>
+</footer>
+
+<script src="assets/js/pngjs.browser.min.js"></script>
+<script src="assets/js/png-to-ico.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
